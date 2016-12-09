@@ -25,5 +25,17 @@ int main() {
   // "You are very old"
   // depending on their answers.
 
+  if ( response1 == "select start" ) {
+    std::cout << "You are old"; 
+  } else {
+    if ( response2 == "vinyl" ) {
+      std::cout << "You are very old"; 
+    } else {
+      std::cout << "You are young"; 
+    }
+  }
+
+  // breaks if you, e.g., add a space after typing "vinyl" 
+
   return 0;
 }
