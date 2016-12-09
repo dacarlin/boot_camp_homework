@@ -26,6 +26,27 @@
 // scale as a function of the input parameter?  (i.e. Is there a polynomial that
 // describes the running time, and if so, what degree is this polynomial?)
 
+#include <ctime> 
+
+int fib( int n ) { 
+  int v[n+1];
+  v[1] = v[2] = 1;
+  for ( int i = 3; i <= n; i ++ ) { 
+    v[ i ] = v[ i-1 ] + v[ i-2 ];  
+  }
+  return v[n]; 
+}
+
+double time( int n ) { 
+  std::clock_t start; 
+  double duration; 
+  double n_iter = 10000000; 
+  start = std::clock(); 
+  for ( int i = 0; i < n_iter; i ++ ) { fib( n ); }
+  duration = ( std::clock() - start ) / ( double ) CLOCKS_PER_SEC; 
+  return duration; 
+} 
+
 int main() {
   std::cout << "Enter the nth Fibonacci number you would like: ";
 
@@ -33,5 +54,10 @@ int main() {
   std::cin >> which;
 
   std::cout << "The " << which << "th Fibonacci number is: " << fib( which ) << std::endl;
+
+  for ( int i = 10; i <= 40; i ++ ) { 
+    std::cout << i << "\t" << time( i ) << std::endl; 
+  } 
+
   return 0;
 }
