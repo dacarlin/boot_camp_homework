@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string> 
 
 int main() {
   
@@ -26,35 +27,12 @@ int main() {
   // always be there.  Don't worry about writing code to verify that the input
   // is an integer (though, kudos if you did think about that being necessary!)
 
-  // if the pine tree is of height n
-  // there will be n rows of stars 
-  // and one tree trunk 
-
-  // for the kth row of stars, the number of stars 
-  // is 2k + 1 
-
-  int final_number_of_stars = ( 2 * height ) + 1; 
-
-  for ( int i=0; i < height; i++ ) {
-    // for each row of the tree 
-    // there will be 2i + 1 stars on this level 
-    // there will be ( final_number_of_stars - 1 ) / 2 spaces on this level 
-
-    for ( int s=0; s < (final_number_of_stars - ( 2 * j + 1 ) ); s++ ) {
-      std::cout << ' '; 
+  for ( int i = 0; i <= height; i++ ) {
+    if ( i == height ) { 
+      std::cout << std::string( i, ' ' ) << "|"; 
+    } else { 
+      std::cout << std::string( height - i, ' ' ) << std::string( 2 * i + 1, '*' ) << std::endl; 
     }
-
-    for ( int j=0; j < (2 * i) + 1; j++ ) {
-      // for each star
-      // print the star 
-      std::cout << '*'; 
-    }
-    // print a new line for this row
-    std::cout << '\n'; 
   }
-
-  // finally, print the tree trunk 
-  std::cout << '|'; 
-
   return 0;
 }
