@@ -5,6 +5,10 @@
 // The name of this function must be "square" so that the code in main() below
 // runs succesfully.
 
+float square( float x ) {
+  return x * x; 
+}
+
 int main() {
 
   std::cout << "Enter a number: ";
