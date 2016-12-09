@@ -36,12 +36,24 @@ int main() {
   int final_number_of_stars = ( 2 * height ) + 1; 
 
   for ( int i=0; i < height; i++ ) {
-    for ( int j=0; j < i; j++ ) {
+    // for each row of the tree 
+    // there will be 2i + 1 stars on this level 
+    // there will be ( final_number_of_stars - 1 ) / 2 spaces on this level 
+
+    for ( int s=0; s < (final_number_of_stars - ( 2 * j + 1 ) ); s++ ) {
+      std::cout << ' '; 
+    }
+
+    for ( int j=0; j < (2 * i) + 1; j++ ) {
+      // for each star
+      // print the star 
       std::cout << '*'; 
     }
+    // print a new line for this row
     std::cout << '\n'; 
   }
 
+  // finally, print the tree trunk 
   std::cout << '|'; 
 
   return 0;
