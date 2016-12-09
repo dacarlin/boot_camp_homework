@@ -16,6 +16,8 @@
 
 // How long does it take to compute the 20th Fibonacci number?  The 40th?
 
+// Answer: The 20th, maybe a millisecond or less? The 40th, about a second. 
+
 // Wrap the call to fib(which) in a for loop so that you can call the function 100 times.
 // Surround this for loop with two calls to the clock() function in <ctime>.  Using
 // the CLOCKS_PER_SEC constant, measure the running time for a single call to "fib" as
@@ -24,6 +26,25 @@
 // is too small a number of iterations to accurately measure the running time, try
 // increasing this count.
 
+#include <ctime> 
+
+int fib( int i ) {
+  if ( i < 3 ) { 
+    return 1; 
+  } else { 
+    return fib( i-1 ) + fib( i-2 ); 
+  }
+}
+
+double time( int fib_number ) {
+  std::clock_t start; 
+  double duration; 
+  double n_iter = 100; 
+  start = std::clock(); 
+  for ( int i = 0; i < n_iter; i ++ ) { fib( fib_number ); }
+  duration = ( std::clock() - start ) / ( double ) CLOCKS_PER_SEC; 
+  return duration / n_iter; 
+} 
 
 int main() {
   std::cout << "Enter the nth Fibonacci number you would like: ";
@@ -32,5 +53,8 @@ int main() {
   std::cin >> which;
 
   std::cout << "The " << which << "th Fibonacci number is: " << fib( which ) << std::endl;
+
+  std::cout << time( which ) << " seconds (average of 100 iterations)"; 
+
   return 0;
 }
