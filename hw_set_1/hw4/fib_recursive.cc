@@ -56,5 +56,12 @@ int main() {
 
   std::cout << time( which ) << " seconds (average of 100 iterations)"; 
 
+  std::cout << "Now producing data for graph for homework ..." << std::endl; 
+
+  std::cout << "fib_number\trun_time" << std::endl; 
+  for ( int i = 10; i <= 40; i ++ ) {
+    std::cout << i << "\t" << time( i ) << std::endl; 
+  }
+
   return 0;
 }
