@@ -37,6 +37,54 @@
 // of BMI for assessing health, or complications regarding applying
 // it to any particular group of people (like infants).
 
+class Patient {
+private:
+    // data here 
+    std::string name; 
+    double height, weight; // meters, kilograms 
+public: 
+    //Patient( std::string n ) :name{n}, height{0}, weight{0} {} 
+    //Patient() :name{""}, height{0}, weight{0} {} 
+    // why don't these work? See p. 35 of "A Tour of C++" 
+    Patient( std::string n ) { name = n; height = 0; weight = 0; } 
+    Patient() { name = ""; height = 0; weight = 0; }  
+
+    // methods to set private data 
+    void set_name( std::string n ) {
+        name = n; 
+    } 
+
+    void set_height( double h ) {
+        height = h; 
+    } 
+
+    void set_weight( double w ) { 
+        weight = w; 
+    } 
+
+    // methods to get data 
+    std::string get_name() { 
+        return name; 
+    } 
+
+    double get_height() {
+        return height; 
+    } 
+
+    double get_weight() {
+        return weight; 
+    }  
+
+    // method to calculate BMI 
+    double bmi() { 
+        if ( height > 0 and weight > 0 ) { 
+            return weight / ( height * height ); // unit: kg/m^2 
+        } else {
+            return 0; 
+        }
+    } 
+}; 
+
 int main() {
 
   Patient father("Andrew Nonymous");
