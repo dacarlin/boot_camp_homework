@@ -44,7 +44,7 @@ double time( int n ) {
   start = std::clock(); 
   for ( int i = 0; i < n_iter; i ++ ) { fib( n ); }
   duration = ( std::clock() - start ) / ( double ) CLOCKS_PER_SEC; 
-  return duration; 
+  return duration / n_iter; 
 } 
 
 int main() {
