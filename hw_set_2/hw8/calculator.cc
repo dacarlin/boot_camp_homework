@@ -6,12 +6,16 @@ using namespace std;
 
 // Instructions: 
 //
-// In this assingment, you will get practice passing values by reference in C++. 
-// A reference is an alias for a variable - its just a different way of accessing the data
-// stored in a variable in memory. You can access a variable by reference using the "&" operator. 
+// In this assingment, you will practice passing values by reference in C++. 
+// A reference is an alias for a variable - it's just a different way of accessing data
+// stored as a variable in memory. You can access a variable "by reference using" the
 //
-// References have many uses. First they help to conserve memory. When you pass a variable 
-// into a function, that function makes a copy of it at runtime. This can become expensive when
+// & 
+// 
+// operator. 
+//
+// References help to conserve memory. When you pass a variable 
+// into a function, that function makes a copy of it at run time. This can become expensive (define) when
 // passing large arrays or data strucutres. References are also helpful when writing functions. 
 // A function can only return one value, but sometimes you might want to modify a pair of values at
 // once. You can then write a void-returning function in which both results are passed by reference
@@ -47,7 +51,17 @@ using namespace std;
 // > ./calculator.g++ 14 - 12
 // Does it give you the results you would expect?
 
+// 2. 
 
+void add( int i, int j, int & k ) {
+    k = i + j; 
+}
+
+// 3. 
+
+void subtract( int i, int j, int & k ) { 
+    k = i - j; 
+} 
 
 int main( int argc, char *argv[] ) {
 
@@ -58,6 +72,8 @@ int main( int argc, char *argv[] ) {
 
 	// 1. Initialize a new integer variable, result, to 0.  This variable
 	// will be passed by reference into the functions you will write.
+
+    int result = 0; 
 
 	///// DO NOT MODIFY CODE BELOW THIS LINE!!! //////
 
