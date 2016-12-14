@@ -72,7 +72,5 @@ int main() {
     std::cout << *iter << std::endl; 
   }
 
-  // you're kidding me. cf. rend (v.) tear (something) into pieces 
-
   return 0;
 }

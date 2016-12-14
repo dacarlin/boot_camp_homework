@@ -45,7 +45,7 @@ private:
 public: 
     //Patient( std::string n ) :name{n}, height{0}, weight{0} {} 
     //Patient() :name{""}, height{0}, weight{0} {} 
-    // why don't these work? See p. 35 of "A Tour of C++" 
+    // why don't these work? See p. 35 of Stroustrup, "A Tour of C++" 
     Patient( std::string n ) { name = n; height = 0; weight = 0; } 
     Patient() { name = ""; height = 0; weight = 0; }  
 

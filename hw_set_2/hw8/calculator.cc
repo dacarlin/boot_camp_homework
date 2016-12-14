@@ -33,14 +33,18 @@ using namespace std;
 // The function should compute the sum of the first two arguments and store the value
 // in the third argument.  It should return void.
 
-
+void add( int i, int j, int & k ) {
+    k = i + j; 
+}
 
 // 3. Write subtract function here.
 // Again, this function should take two integer arguments and a third integer reference argument.
 // The function should compute the difference of the first two arguments and store the value
 // in the third argument.  It should return void.
 
-
+void subtract( int i, int j, int & k ) { 
+    k = i - j; 
+} 
 
 // 4.
 // Instead of prompting the user for input, this program will read from the command line.
@@ -51,45 +55,33 @@ using namespace std;
 // > ./calculator.g++ 14 - 12
 // Does it give you the results you would expect?
 
-// 2. 
-
-void add( int i, int j, int & k ) {
-    k = i + j; 
-}
-
-// 3. 
-
-void subtract( int i, int j, int & k ) { 
-    k = i - j; 
-} 
-
 int main( int argc, char *argv[] ) {
 
-	// Pull String args
-	int first_arg = atoi(argv[1]);
-	int second_arg = atoi(argv[3]); 
-	std::string operator_arg = argv[2];
+    // Pull String args
+    int first_arg = atoi(argv[1]);
+    int second_arg = atoi(argv[3]); 
+    std::string operator_arg = argv[2];
 
-	// 1. Initialize a new integer variable, result, to 0.  This variable
-	// will be passed by reference into the functions you will write.
+    // 1. Initialize a new integer variable, result, to 0.  This variable
+    // will be passed by reference into the functions you will write.
 
     int result = 0; 
 
-	///// DO NOT MODIFY CODE BELOW THIS LINE!!! //////
+    ///// DO NOT MODIFY CODE BELOW THIS LINE!!! //////
 
-	// Pick a method
-	if ( operator_arg.compare("+") == 0 ) {
+    // Pick a method
+    if ( operator_arg.compare("+") == 0 ) {
 
-		add( first_arg, second_arg, result );
-	
-	} else if ( operator_arg.compare("-") == 0 ) {
-	
-		subtract( first_arg, second_arg, result ); 
-	
-	}
+        add( first_arg, second_arg, result );
+    
+    } else if ( operator_arg.compare("-") == 0 ) {
+    
+        subtract( first_arg, second_arg, result ); 
+    
+    }
 
-	// Print the result
-	std::cout << "Result: " << result << std::endl;
+    // Print the result
+    std::cout << "Result: " << result << std::endl;
 
-	return 0; 
+    return 0; 
 }
