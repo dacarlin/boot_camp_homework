@@ -144,12 +144,32 @@ Pet::set_metabolic_rate( float rate )
 //////////////////////////////////////////////////////////////////////
 // Declare and implement class TabbyCat here
 
+class TabbyCat : public Pet 
+{
+public: 
+    TabbyCat() : Pet()
+    {
+        set_initial_weight( .5 ); 
+        set_ideal_adult_weight( 12 ); 
+        set_age_of_adulthood( 10 ); 
+        set_metabolic_rate( 6 ); 
+        // Doing it this way allows us to modify private members 
+        // of the Pet class in this derived class.  
+        // Why not make the members themselves protected? 
+    }
+    ~TabbyCat() {} 
+
+    void meow() { std::cout << "Meow" << std::endl; } 
+}; 
+
 
 //////////////////////////////////////////////////////////////////////
 // The following code you will not need to change, though, if you want to figure out how
 // much you need to feed your TabbyCat each hour, then feel free.
 
 int main() {
+
+
   TabbyCat snookums;
 
   // simulate fifteen days, feeding snookums every 8 hours. Since she's growing,
@@ -170,4 +190,7 @@ int main() {
   }
 
 
+    snookums.meow(); 
+
+    return 0; 
 }

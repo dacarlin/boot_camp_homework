@@ -25,6 +25,7 @@
 // Why does the whats_area() function in the rectangle class generate an error?
 
 #include <iostream>
+#include <math.h> 
 
 class shape {
 public:
@@ -34,6 +35,9 @@ protected:
 
   // Setter function: changes the value of the area stored in area_
   // what does it meant that this function is protected?
+
+  // Ans. It can only be accessed by this class and derived classes 
+    
   float set_area(float a){area_ = a;} 
 
 private:
@@ -63,11 +67,61 @@ private:
 // the value to the radius. There should also be a calculate_area function that
 // calculates the area of the circle.
 
+class circle : public shape 
+{
+public:
+    circle( float r = -1 ) : shape() 
+    {
+        radius_ = r; 
+        set_area( calculate_area() ); 
+    }
+
+    float calculate_area()
+    {
+        return M_PI * radius_ * radius_; 
+    }
+
+    void set_radius( float r )
+    {
+        radius_ = r; 
+        set_area( calculate_area() );
+    }
+    
+private: 
+    float radius_; 
+}; 
+
 // Write a derived class, triangle, from the base class shape.  A triangle can be
 // defined by the lengths of its three sides.  Make sure your triangle is able to
 // calculate its area.  If the three lengths do not define a proper triangle (e.g.
 // if one lenght is 1 another length is 2 and the third length is 100, then you
 // don't have a closed triangle), then set the area to be -1.
+
+class triangle : public shape 
+{
+public: 
+    triangle( float len1, float len2, float len3 ) : shape ()
+    {
+        a_ = len1; 
+        b_ = len2; 
+        c_ = len3; 
+        set_area( calculate_area() ); 
+    }
+
+    float calculate_area() 
+    {
+        if ( ( a_ + b_ > c_ ) && ( a_ + c_ > b_ ) && ( b_ + c_ > a_ ) ) {
+            return ( a_ + b_ + c_ ) / 2; 
+        } else {
+            return -1; 
+        } 
+    } 
+
+private: 
+    float a_; 
+    float b_; 
+    float c_; 
+}; 
 
 int main(){
   
@@ -81,13 +135,13 @@ int main(){
   //Create rectangle object
   rectangle rec1(user_base, user_height);
 
-
   //Test your circle class
   float user_radius;
   std::cout << "Please enter a circle radius: ";
   std::cin >> user_radius;
 
   //create an object of the circle class with radius equal to user_radius
+  circle cir1( user_radius ); 
   
   // Test your triangle class
   float length1, length2, length3;
@@ -102,9 +156,12 @@ int main(){
   // Your triangle class should probably make sure that these lengths
   // are sensical.  (do the distances satisfy the "triangle inequality"?)
 
+  triangle tri1( length1, length2, length3 ); 
+
   std::cout << "The area of the rectangle is: " << rec1.get_area() << std::endl;
-  std::cout << "The area of the circle is: " << std::endl;
-  std::cout << "The area of the triangle is: " << std::endl;
+  std::cout << "The area of the circle is: " << cir1.get_area() << std::endl;
+  std::cout << "The area of the triangle is: " << tri1.get_area() << std::endl;
+  
 
   return 0;
 

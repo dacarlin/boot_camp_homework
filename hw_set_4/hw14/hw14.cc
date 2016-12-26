@@ -36,8 +36,9 @@
 
 
 #include <iostream>
+#include "shapes.cc" 
 
-class shape {
+/* class shape {
 public:
   float get_area(){return area_;} //Getter function: returns the area stored in area_
 
@@ -80,7 +81,14 @@ private:
 // if one lenght is 1 another length is 2 and the third length is 100, then you
 // don't have a closed triangle), then set the area to be -1.
 
+*/ 
+
+
+#include <vector> 
+
 int main(){
+
+    std::vector< shape * > v; 
   
   float user_base, user_height;
 
@@ -91,7 +99,7 @@ int main(){
 
   //Create rectangle object and put it into the vector of shape *'s
   // this line will not work, but it's close: rectangle rec1(user_base, user_height);
-
+  v.push_back( new rectangle {user_base, user_height } ); 
 
   //Test your circle class
   float user_radius;
@@ -99,6 +107,7 @@ int main(){
   std::cin >> user_radius;
 
   //create an object of the circle class with radius equal to user_radius
+  v.push_back( new circle { user_radius } ); 
   
   // Test your triangle class
   float length1, length2, length3;
@@ -112,11 +121,15 @@ int main(){
   // create an object of the triangle class with the three lengths.
   // Your triangle class should probably make sure that these lengths
   // are sensical.  (do the distances satisfy the "triangle inequality"?)
+  v.push_back( new triangle { length1, length2, length3 } ); 
 
   // Replace the following statements with a for loop
-  std::cout << "The area of the rectangle is: " << rec1.get_area() << std::endl;
-  std::cout << "The area of the circle is: " << std::endl;
-  std::cout << "The area of the triangle is: " << std::endl;
+  //std::cout << "The area of the rectangle is: " << rec1.get_area() << std::endl;
+  //std::cout << "The area of the circle is: " << cir1.get_areastd::endl;
+  //std::cout << "The area of the triangle is: " << std::endl;
+
+  for ( auto my_shape : v ) 
+    std::cout << my_shape->get_area() << std::endl; 
 
   // Now iterate across the vector and delete all the objects pointed to by it;
   // you should not leak memory.

@@ -35,4 +35,30 @@
 
 #include <vector>
 #include <string>
+#include <iostream> 
+
+std::vector< int >  
+split_zero_and_ones_string( std::string s )
+{
+    std::vector< int > v; 
+    for ( int i = 0; i != s.size(); i ++ ) 
+    {
+        if ( ( s[ i ] != s[ i - 1 ] ) && ( i != 0 ) ) {
+            v.push_back( i ); 
+        } 
+    } 
+    return v; 
+}
+
+int main() {
+    std::vector< std::string > test_strings { "0", "10", "11", "000001111110000111111110000" }; 
+    for ( auto test_string : test_strings ) 
+    {
+        std::cout << "test string: " << test_string << ", indicies: "; 
+        for ( auto index : split_zero_and_ones_string( test_string ) )
+            std::cout << index << " "; 
+        std::cout << std::endl; 
+    } 
+    return 0; 
+} 
 

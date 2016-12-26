@@ -32,7 +32,7 @@ public:
 
   void increment() {
     std::cout << name_ << " call to increment; ";
-    if ( /* write code here to make sure that if intptr_ is 0, to skip the block below */ ) {   // 1.
+    if ( intptr_ != 0 ) {   // 1.
       std::cout << "incrementing value stored at " << intptr_;
       *intptr_ = *intptr_ + 1;
       std::cout << "; new value of " << *intptr_ << std::endl;
@@ -48,7 +48,7 @@ private:
 };
 
 int main() {
-  int * myint = /* write code here to allocate a new integer */; // 2.
+  int * myint = new int; /* write code here to allocate a new integer */
   std::cout << "Please enter an integer: ";
   std::cin  >> *myint; /* note, this code will segfault if you haven't allocated an integer above */
   std::cout << std::endl;
@@ -60,12 +60,24 @@ int main() {
   std::cout << "START " << *myint << std::endl;
 
   // 3. call increment on inc1
+  inc1->increment(); 
   // 4. call increment on inc2
+  inc2->increment(); 
   // 5. call increment on inc3
+  inc3->increment(); 
 
   std::cout << "END " << *myint << std::endl;
 
   /* write code here to deallocate myint, inc1, inc2, and inc3 so that you do not leak memory */ // 6.
+  delete myint; 
+  delete inc1; 
+  delete inc2; 
+  delete inc3; 
+
+  myint = 0; 
+  inc1 = 0; 
+  inc2 = 0; 
+  inc3 = 0; 
 
   return 0;
 }

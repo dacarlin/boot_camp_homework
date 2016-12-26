@@ -75,6 +75,10 @@ public:
   float calorie_reserve() const;
 
   // Add the two methods, set_favorite_food and get_favorite_food here
+  std::string get_favorite_food(); 
+  void set_favorite_food( std::string ) {
+    std::cout << "Ni" << std::endl; 
+  }
 
 protected:
   void set_initial_weight( float weight ); // in pounds
@@ -92,6 +96,7 @@ private:
   float happiness_;
   float calorie_reserve_;
   // Add a data member here to store the Pet's favorite food
+  std::string favorite_food_; 
 
 };
 
@@ -103,6 +108,7 @@ Pet::Pet() :
   happiness_( 1.0 ),
   calorie_reserve_( 400 ),
   // make sure you initialize the favorite food data member in the constructor 
+  favorite_food_( "seeds" )
 {}
 
 Pet::~Pet() {}
@@ -182,6 +188,22 @@ Pet::set_metabolic_rate( float rate )
   metabolic_rate_ = rate;
 }
 
+// favorite food getter and setter
+
+std::string 
+Pet::get_favorite_food() 
+{
+    return favorite_food_; 
+}
+
+void 
+Pet::set_favorite_food( std::string food )
+{
+    favorite_food_ = food; 
+}
+
+/// end of Pet class 
+
 void
 train_at_salad_bar( Pet & pet, int num_helpings ) {
   pet.set_favorite_food( "spinach" );
@@ -204,6 +226,28 @@ train_at_salad_bar( Pet & pet, int num_helpings ) {
 
 }
 
+class TabbyCat : public Pet 
+{
+public: 
+    TabbyCat() : Pet()
+    { 
+        set_initial_weight( 12 ); 
+        set_ideal_adult_weight( 6 ); 
+        set_age_of_adulthood( 10 ); 
+        set_metabolic_rate( 6 ); 
+    }
+
+    void set_favorite_food( std::string food ); 
+}; 
+
+// override favorite food for TabbyCats
+
+void 
+TabbyCat::set_favorite_food( std::string food )
+{
+    favorite_food_ = "meat"; 
+    std::cout << "Warning: TabbyCats only eat meat" << std::endl; 
+} 
 
 int main() {
   TabbyCat snookums;
@@ -211,7 +255,7 @@ int main() {
   // simulate fifteen days, feeding snookums every 8 hours. Since she's growing,
   // she'll need more and more food each time she is fed until day 10
 
-  for ( int ii = 0; ii < 45; ++ii ) {
+  for ( int ii = 0; ii < 3; ++ii ) {
     float ncalories( 0 );
     if ( ii < 30 ) {
       ncalories = 200 + ii*10;
@@ -219,7 +263,7 @@ int main() {
       ncalories = 12 * 8 * 6;
     }
     snookums.feed( 1.0, ncalories );
-    for ( int jj = 0; jj < 8; ++jj ) {
+    for ( int jj = 0; jj < 4; ++jj ) {
       snookums.increment_hour();
       std::cout << "Snookums status, hour " << ii*8 + jj + 1 << " " << snookums.weight() << " " << snookums.happiness() << " " << snookums.calorie_reserve() << std::endl;
     }

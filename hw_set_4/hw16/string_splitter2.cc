@@ -37,3 +37,50 @@ struct start_and_stop {
 // Grading will work as it did for the previous assignment -- your int main() will
 // be replaced with another one that will call your function and make sure it 
 // produces the correct answers.  Think hard about edge cases.
+
+#include <vector>
+#include <string>
+#include <iostream> 
+
+std::vector< start_and_stop >  
+split_zero_and_ones_string( std::string s )
+{
+    std::vector< start_and_stop > v; 
+    for ( int i = 0; i != s.size(); i ++ ) 
+    {
+        if ( ( s[ i ] != s[ i - 1 ] ) && ( i != 0 ) ) {
+            v.push_back( new start_and_stop( 0, 0 ) ); 
+        } 
+    } 
+    return v; 
+}
+
+std::vector< start_and_stop >  
+split_zeros_and_ones_blocks_from_string( std::string const & input_string )
+{
+    std::vector< char > v;
+    for ( char letter : s ) {
+        if ( ( letter == 1 ) || ( letter == 0 ) ) {
+            v.push_back( letter ); 
+        }
+    }
+
+    // now we need to make a string from the vector 
+    // and call the function we wrote before 
+    std::string clean_s( v.begin(), v.end() ); 
+    return split_zero_and_ones_string( clean_s ); 
+}
+
+int main() {
+    std::vector< std::string > test_strings { "0", "10", "11", "000001111110000111111110000", 
+        "00001110293411111887888880000222333311111" }; 
+    for ( auto test_string : test_strings ) 
+    {
+        std::cout << "test string: " << test_string << ", indicies: "; 
+        for ( auto index : split_zero_and_ones_string( test_string ) )
+            std::cout << index << " "; 
+        std::cout << std::endl; 
+    } 
+    return 0; 
+} 
+

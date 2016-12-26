@@ -107,15 +107,19 @@ public:
 
 int main() {
 
-  std::vector< MathlikeOperator * > vec; 
-	vec.push_back( new Cuber );  
-	vec.push_back( new Squarer ); 
-	vec.push_back( new Doubler ); 
+  std::vector< MathlikeOperator * > v { new Cuber, new Squarer, new Doubler }; 
 
-  for ( int i = 0; i != 11; i ++ ) {
-		for ( auto op : vec ) 
-			std::cout << op->operate_on( i ) << std::endl; 
+  for ( auto i = v.begin(); i != v.end(); i++ ) {
+    //std::cout << typeid( i ).name() << std::endl;
+		delete i; 
   }
+
+
+  //for ( int i = 0; i != 11; i ++ ) {
+	//	for ( int j = 0; j != vec.size(); j ++ ) { 
+	//		std::cout << vec[ j ]->operate_on( i ) << std::endl; 
+	//	} 
+  //}
 
   //here's an example for one class and one integer:
   //MathlikeOperator * cuber = new Cuber; //wow!  MathlikeOperator*, but pointing at a Cuber!
