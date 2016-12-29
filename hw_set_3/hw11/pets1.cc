@@ -3,7 +3,7 @@
 // You are writing a new video game to be played by 50-somethings
 // on Facebook.  The player will accumulate pets and feed them
 // and take them to get pedicures and to eat hand made rosemary and
-// olive oil biscuis.  The players will pay small amounts of money 
+// olive oil biscuis.  The players will pay small amounts of money
 // each day to keep their pets happy and affectionate.  You will
 // be a billionare.
 
@@ -144,23 +144,20 @@ Pet::set_metabolic_rate( float rate )
 //////////////////////////////////////////////////////////////////////
 // Declare and implement class TabbyCat here
 
-class TabbyCat : public Pet 
+class TabbyCat : public Pet
 {
-public: 
-    TabbyCat() : Pet()
-    {
-        set_initial_weight( .5 ); 
-        set_ideal_adult_weight( 12 ); 
-        set_age_of_adulthood( 10 ); 
-        set_metabolic_rate( 6 ); 
-        // Doing it this way allows us to modify private members 
-        // of the Pet class in this derived class.  
-        // Why not make the members themselves protected? 
-    }
-    ~TabbyCat() {} 
+public:
+  TabbyCat() : Pet()
+  {
+    set_initial_weight( .5 );
+    set_ideal_adult_weight( 12 );
+    set_age_of_adulthood( 10 );
+    set_metabolic_rate( 6 );
+  }
+  ~TabbyCat() {}
 
-    void meow() { std::cout << "Meow" << std::endl; } 
-}; 
+  void meow() { std::cout << "Meow" << std::endl; }
+};
 
 
 //////////////////////////////////////////////////////////////////////
@@ -190,7 +187,7 @@ int main() {
   }
 
 
-    snookums.meow(); 
+    snookums.meow();
 
-    return 0; 
+    return 0;
 }

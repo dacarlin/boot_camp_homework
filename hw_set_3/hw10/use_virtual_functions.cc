@@ -107,16 +107,6 @@ public:
 
 int main() {
 
-  std::vector< MathlikeOperator * > vec; 
-	vec.push_back( new Cuber );  
-	vec.push_back( new Squarer ); 
-	vec.push_back( new Doubler ); 
-
-  for ( int i = 0; i != 11; i ++ ) {
-		for ( auto op : vec ) 
-			std::cout << op->operate_on( i ) << std::endl; 
-  }
-
   //here's an example for one class and one integer:
   //MathlikeOperator * cuber = new Cuber; //wow!  MathlikeOperator*, but pointing at a Cuber!
   //int j = 9;
@@ -134,6 +124,19 @@ int main() {
 	//Cuber cuber; // ILLEGAL! (it compiles, but it's against the assignment)
 	//Cuber * cuber = new Cuber; // ALSO ILLEGAL! (it compiles, but it's against the assignment)
 
+  std::vector< MathlikeOperator * > v { new Cuber, new Squarer, new Doubler }; 
+
+  for ( auto op : v ) 
+  // type of op is MathlikeOperator * but using auto is more readable   
+	// because the vector we are iterating through is defined on the previous line
+    for ( int i = 1; i != 11; i ++ )
+		  std::cout << op->name() << " on " << i << " = " << op->operate_on( i ) << std::endl;  
+
   //did you remember to deallocate the pointers?
+  for ( auto op : v ) {
+		delete op;  
+		op = 0; 
+  }
+
   return 0;
 }

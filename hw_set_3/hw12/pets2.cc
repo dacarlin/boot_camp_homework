@@ -5,7 +5,7 @@
 // You are writing a new video game to be played by 50-somethings
 // on Facebook.  The player will accumulate pets and feed them
 // and take them to get pedicures and to eat hand made rosemary and
-// olive oil biscuis.  The players will pay small amounts of money 
+// olive oil biscuis.  The players will pay small amounts of money
 // each day to keep their pets happy and affectionate.  You will
 // be a billionare.
 
@@ -68,17 +68,14 @@ public:
   ~Pet();
 
   void feed( float quality, float calories );
-
   void increment_hour();
   float weight() const;
   float happiness() const;
   float calorie_reserve() const;
 
   // Add the two methods, set_favorite_food and get_favorite_food here
-  std::string get_favorite_food(); 
-  void set_favorite_food( std::string ) {
-    std::cout << "Ni" << std::endl; 
-  }
+  std::string get_favorite_food();
+  virtual void set_favorite_food( std::string );
 
 protected:
   void set_initial_weight( float weight ); // in pounds
@@ -96,7 +93,7 @@ private:
   float happiness_;
   float calorie_reserve_;
   // Add a data member here to store the Pet's favorite food
-  std::string favorite_food_; 
+  std::string favorite_food_;
 
 };
 
@@ -107,7 +104,7 @@ Pet::Pet() :
   age_( -1.0 ),
   happiness_( 1.0 ),
   calorie_reserve_( 400 ),
-  // make sure you initialize the favorite food data member in the constructor 
+  // make sure you initialize the favorite food data member in the constructor
   favorite_food_( "seeds" )
 {}
 
@@ -163,6 +160,9 @@ Pet::happiness() const { return happiness_; }
 float
 Pet::calorie_reserve() const { return calorie_reserve_; }
 
+std::string
+Pet::get_favorite_food() { return favorite_food_; }
+
 void
 Pet::set_initial_weight( float weight )
 {
@@ -188,21 +188,13 @@ Pet::set_metabolic_rate( float rate )
   metabolic_rate_ = rate;
 }
 
-// favorite food getter and setter
-
-std::string 
-Pet::get_favorite_food() 
-{
-    return favorite_food_; 
-}
-
-void 
+void
 Pet::set_favorite_food( std::string food )
 {
-    favorite_food_ = food; 
+  favorite_food_ = food;
 }
 
-/// end of Pet class 
+/// end of Pet class
 
 void
 train_at_salad_bar( Pet & pet, int num_helpings ) {
@@ -226,28 +218,22 @@ train_at_salad_bar( Pet & pet, int num_helpings ) {
 
 }
 
-class TabbyCat : public Pet 
+class TabbyCat : public Pet
 {
-public: 
-    TabbyCat() : Pet()
-    { 
-        set_initial_weight( 12 ); 
-        set_ideal_adult_weight( 6 ); 
-        set_age_of_adulthood( 10 ); 
-        set_metabolic_rate( 6 ); 
-    }
+public:
+  TabbyCat() : Pet()
+  {
+    set_initial_weight( 12 );
+    set_ideal_adult_weight( 6 );
+    set_age_of_adulthood( 10 );
+    set_metabolic_rate( 6 );
+    Pet::set_favorite_food( "meat" );
+  }
 
-    void set_favorite_food( std::string food ); 
-}; 
-
-// override favorite food for TabbyCats
-
-void 
-TabbyCat::set_favorite_food( std::string food )
-{
-    favorite_food_ = "meat"; 
-    std::cout << "Warning: TabbyCats only eat meat" << std::endl; 
-} 
+  void set_favorite_food( std::string food ) {
+    std::cout << "Warning: TabbyCats only eat meat" << std::endl;
+  };
+};
 
 int main() {
   TabbyCat snookums;
