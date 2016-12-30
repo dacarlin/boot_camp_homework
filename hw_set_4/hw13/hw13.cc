@@ -21,7 +21,7 @@
 // and set_area functions. You will test your new derived classes by creating
 // instances of each in main() and printing their areas.
 
-// Question (Answer here):
+// Question (Answer here): `area_` is a `private` member of the base class, `shape`
 // Why does the whats_area() function in the rectangle class generate an error?
 
 #include <iostream>
@@ -35,8 +35,7 @@ protected:
 
   // Setter function: changes the value of the area stored in area_
   // what does it meant that this function is protected?
-
-  // Ans. It can only be accessed by this class and derived classes 
+  // It can only be accessed by this class and derived classes 
     
   float set_area(float a){area_ = a;} 
 

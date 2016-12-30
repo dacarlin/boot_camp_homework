@@ -35,52 +35,76 @@ struct start_and_stop {
 // split_zeros_and_ones_blocks_from_string( std::string const & input_string );
 //
 // Grading will work as it did for the previous assignment -- your int main() will
-// be replaced with another one that will call your function and make sure it 
+// be replaced with another one that will call your function and make sure it
 // produces the correct answers.  Think hard about edge cases.
 
 #include <vector>
 #include <string>
-#include <iostream> 
+#include <iostream>
 
-std::vector< start_and_stop >  
-split_zero_and_ones_string( std::string s )
+std::vector< start_and_stop >
+split_zero_and_ones_string( std::string const s )
 {
-    std::vector< start_and_stop > v; 
-    for ( int i = 0; i != s.size(); i ++ ) 
-    {
-        if ( ( s[ i ] != s[ i - 1 ] ) && ( i != 0 ) ) {
-            v.push_back( new start_and_stop( 0, 0 ) ); 
-        } 
-    } 
-    return v; 
+    // vector to store things in
+    std::vector< int > v;
+
+    // this is first "edge case"
+    if ( s.size() < 2 ) {
+      return v;
+    }
+
+    // write down the answer
+    for ( int i = 0; i != s.size(); i ++ ) {
+
+      std::cout << i << "\t" << s[ i ] << "\t";
+
+      start_and_stop ss;
+
+      if ( s[i] != s[i-1] ) {
+        //std::cout << "BIAFRA ";
+        // v.push_back( i );
+        ss.start_ = i;
+      }
+
+      if ( s[i] != s[i+1] ) {
+        //std::cout << "SCIAFRA ";
+        ss.stop_ = i;
+      }
+
+      std::cout << ss.start_ << ss.stop_ << std::endl;
+
+    }
+
+
+    // return for debug
+    return v;
 }
 
-std::vector< start_and_stop >  
+std::vector< start_and_stop >
 split_zeros_and_ones_blocks_from_string( std::string const & input_string )
 {
     std::vector< char > v;
-    for ( char letter : s ) {
+    for ( char letter : input_string ) {
         if ( ( letter == 1 ) || ( letter == 0 ) ) {
-            v.push_back( letter ); 
+            v.push_back( letter );
         }
     }
 
-    // now we need to make a string from the vector 
-    // and call the function we wrote before 
-    std::string clean_s( v.begin(), v.end() ); 
-    return split_zero_and_ones_string( clean_s ); 
+    // now we need to make a string from the vector
+    // and call the function we wrote before
+    std::string clean_s( v.begin(), v.end() );
+    return split_zero_and_ones_string( clean_s );
 }
 
 int main() {
-    std::vector< std::string > test_strings { "0", "10", "11", "000001111110000111111110000", 
-        "00001110293411111887888880000222333311111" }; 
-    for ( auto test_string : test_strings ) 
+    std::vector< std::string > test_strings { "0", "10", "11", "000001111110000111111110000",
+        "00001110293411111887888880000222333311111" };
+    for ( auto test_string : test_strings )
     {
-        std::cout << "test string: " << test_string << ", indicies: "; 
+        std::cout << "test string: " << test_string << ", indicies: ";
         for ( auto index : split_zero_and_ones_string( test_string ) )
-            std::cout << index << " "; 
-        std::cout << std::endl; 
-    } 
-    return 0; 
-} 
-
+            std::cout << index << " ";
+        std::cout << std::endl;
+    }
+    return 0;
+}
