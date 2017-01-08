@@ -81,12 +81,12 @@ int main(){
   //std::cout << "The area of the circle is: " << cir1.get_areastd::endl;
   //std::cout << "The area of the triangle is: " << std::endl;
 
-  for ( auto my_shape : v ) 
-    std::cout << my_shape->get_area() << std::endl; 
+  for ( auto shape : v ) // type of `my_shape` is `shape`
+    std::cout << "shape: " << shape->name() << " area: " << shape->get_area() << std::endl; 
 
   // Now iterate across the vector and delete all the objects pointed to by it;
   // you should not leak memory.
-  for ( auto my_shape : v ) { // type of v is `shape`
+  for ( auto my_shape : v ) { // type of `my_shape` is `shape`
     delete my_shape; 
     my_shape = 0; 
   }

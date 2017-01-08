@@ -42,69 +42,50 @@ struct start_and_stop {
 #include <string>
 #include <iostream>
 
-std::vector< start_and_stop >
-split_zero_and_ones_string( std::string const s )
+using namespace std; 
+
+vector< start_and_stop >
+split_zeros_and_ones_blocks_from_string( string const & input_string ) 
 {
-    // vector to store things in
-    std::vector< int > v;
+    // we'll need a vector to hold things
+    // and initial values for start and stop positions 
+    vector< start_and_stop > v;
+    int start { -1 };
+    int stop { -1 }; 
 
-    // this is first "edge case"
-    if ( s.size() < 2 ) {
-      return v;
-    }
+    // loop over the digits in the input string 
+    for ( int i=0; i!=input_string.size(); i++ ) 
+    {
+        if ( ( input_string[i] == '0' ) || ( input_string[i] == '1' ) )
+        // ignore digits other than 0 and 1 
+        {
+            if ( input_string[i] != input_string[i-1] ) start = i; 
+            if ( input_string[i] != input_string[i+1] ) stop = i; 
+        }
 
-    // write down the answer
-    for ( int i = 0; i != s.size(); i ++ ) {
-
-      std::cout << i << "\t" << s[ i ] << "\t";
-
-      start_and_stop ss;
-
-      if ( s[i] != s[i-1] ) {
-        //std::cout << "BIAFRA ";
-        // v.push_back( i );
-        ss.start_ = i;
-      }
-
-      if ( s[i] != s[i+1] ) {
-        //std::cout << "SCIAFRA ";
-        ss.stop_ = i;
-      }
-
-      std::cout << ss.start_ << ss.stop_ << std::endl;
-
-    }
-
-
-    // return for debug
-    return v;
-}
-
-std::vector< start_and_stop >
-split_zeros_and_ones_blocks_from_string( std::string const & input_string )
-{
-    std::vector< char > v;
-    for ( char letter : input_string ) {
-        if ( ( letter == 1 ) || ( letter == 0 ) ) {
-            v.push_back( letter );
+        if ( ( start > -1 ) && ( stop > -1 ) )
+        // if both start and stop positions have been set for this digit 
+        // create a new struct and append to vector 
+        {
+            v.push_back( start_and_stop { start, stop } ); 
+            // reset start and stop for next one 
+            start = -1; 
+            stop = -1; 
         }
     }
 
-    // now we need to make a string from the vector
-    // and call the function we wrote before
-    std::string clean_s( v.begin(), v.end() );
-    return split_zero_and_ones_string( clean_s );
+    // print results 
+    cout << "input string: " << input_string << "\nstart stop" << endl; 
+    for ( auto dat : v ) 
+        cout << dat.start_ << " " << dat.stop_ << endl; 
+
+    return v; 
 }
 
-int main() {
-    std::vector< std::string > test_strings { "0", "10", "11", "000001111110000111111110000",
-        "00001110293411111887888880000222333311111" };
-    for ( auto test_string : test_strings )
-    {
-        std::cout << "test string: " << test_string << ", indicies: ";
-        for ( auto index : split_zero_and_ones_string( test_string ) )
-            std::cout << index << " ";
-        std::cout << std::endl;
-    }
-    return 0;
+int main()
+{   
+    vector< string > test_strings { "0", "1", "00001110293411111887888880000222333311111" }; 
+    for ( auto str : test_strings )
+        split_zeros_and_ones_blocks_from_string( str ); 
+    return 0; 
 }

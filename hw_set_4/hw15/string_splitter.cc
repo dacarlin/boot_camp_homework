@@ -37,64 +37,31 @@
 #include <string>
 #include <iostream>
 
-struct start_and_stop {
-  int start_;
-  int stop_;
-};
+// function to split zero and ones string 
 
-std::vector< start_and_stop * >
-split_zero_and_ones_string( std::string const input_string )
+std::vector< int >
+split_zero_and_ones_string( std::string const & input_string )
 {
-  std::vector< start_and_stop * > v;
+    std::vector< int > v; 
+    for (int i=1; i !=input_string.length(); i++)
+    // begin at second digit
+        if (input_string[i] != input_string[i-1] )
+        // if current digit is not the same as previous digit 
+            v.push_back( i ); 
+            // add index to result list 
 
-  // this is first "edge case"
-  if ( input_string.size() < 2 ) return v;
-
-  for ( int i = 0; i < input_string.length(); i ++ )
-  {
-    std::cout << i;
-
-    bool first_ = false;
-    bool last_ = false;
-
-    if ( input_string[i] != input_string[i-1] )
-    {
-      first_ = true;
-      std::cout << "\tfirst";
-    }
-
-    if ( input_string[i] != input_string[i+1] )
-    {
-      last_ = true;
-      std::cout << "\tlast";
-    }
-
-    std::cout << std::endl;
-
-    if (( first_ == true ) && ( last_ == true ))
-    {
-      v.push_back( new start_and_stop { i, i } ); 
-    }
-
-  }
-
-  return v;
+    //print out results
+    std::cout << "input: " << input_string << "\noutput: "; 
+    for (auto i:v) 
+        std::cout << i << " "; 
+    std::cout << std::endl; 
+    return v; 
 }
 
 int main() {
-    std::vector< std::string > test_strings { "0", "10", "11", "000001111110000111111110000" };
-    for ( auto test_string : test_strings )
-    {
-      std::cout << "test string: " << test_string << std::endl;
-      split_zero_and_ones_string( test_string );
-    }
-
-
-    // {
-    //     // std::cout << "test string: " << test_string << std::endl;
-    //     // for ( auto index : split_zero_and_ones_string( test_string ) )
-    //         // std::cout << "start: " << index->start_ << " stop: " << index->stop_ << std::endl;
-    //     // std::cout << std::endl;
-    // }
-    return 0;
-}
+    std::vector< std::string > test_strings; 
+    test_strings = { "0001", "0", "1", "11100011100011100110011", "000001111110000111111110000" }; 
+    for ( auto str : test_strings )
+        split_zero_and_ones_string( str ); 
+    return 0; 
+} 

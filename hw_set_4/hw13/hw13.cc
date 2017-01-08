@@ -21,8 +21,9 @@
 // and set_area functions. You will test your new derived classes by creating
 // instances of each in main() and printing their areas.
 
-// Question (Answer here): `area_` is a `private` member of the base class, `shape`
-// Why does the whats_area() function in the rectangle class generate an error?
+// Question: Why does the whats_area() function in the rectangle class generate an error?
+// Answer: `whats_area()` in the rectangle class doesn't have access to the variable 
+//         because `area_` is marked `private` in the base class (`shape`) 
 
 #include <iostream>
 #include <math.h> 
@@ -44,7 +45,7 @@ private:
 };
 
 //write a derived class rectangle from the base class shape
-class rectangle : public shape{
+class rectangle : public shape {
 public:
   // note that the rectangle is responsible for informing the base class of its area
   rectangle( float b, float h ) { base_ = b; height_ = h; set_area( calculate_area() ); } //constructor that sets-up default values
@@ -110,7 +111,14 @@ public:
     float calculate_area() 
     {
         if ( ( a_ + b_ > c_ ) && ( a_ + c_ > b_ ) && ( b_ + c_ > a_ ) ) {
-            return ( a_ + b_ + c_ ) / 2; 
+        // we define a valid triangle as one where each side is shorter than 
+        // the sum of the other two sides, else return -1 for the area 
+            double s; 
+            double A; 
+            s = ( a_ + b_ + c_ ) / 2; 
+            A = pow( s * (s - a_) * (s - b_) * (s - c_), 0.5 ); 
+            // Heron's formula 
+            return A; 
         } else {
             return -1; 
         } 
